@@ -1,0 +1,36 @@
+<view class="summary-page">
+  <view class="page-title">总结</view>
+
+  <view class="section-title">月度馆藏报告</view>
+  <navigator class="summary-card month-card" url="/pages/report/report">
+    <view class="card-copy">
+      <view class="card-title">7 月馆藏报告</view>
+      <view class="card-line">共入藏 12 件藏品</view>
+      <view class="card-line">回顾你的七月</view>
+    </view>
+    <image src="/assets/art/month-book.jpg" mode="aspectFill"></image>
+    <view class="card-arrow">›</view>
+  </navigator>
+
+  <view class="section-title today-title">那年今日</view>
+  <navigator class="summary-card today-card" url="/pages/detail/detail?type=photo">
+    <view class="card-copy">
+      <view class="date">2023.07.21</view>
+      <view class="memory">在梦中与你交换晚霞了</view>
+      <view class="quote">“那一次我真切地懂了”</view>
+    </view>
+    <image src="/assets/art/today-city.jpg" mode="aspectFill"></image>
+    <view class="card-arrow">›</view>
+  </navigator>
+
+  <view class="insight-card">
+    <view class="insight-heading">本月小结</view>
+    <view class="insight-stats">
+      <view><text>18</text><text>记录天数</text></view>
+      <view><text>5</text><text>记录字数</text></view>
+      <view><text>2</text><text>分钟语音</text></view>
+    </view>
+  </view>
+
+  <museum-nav active="summary"></museum-nav>
+</view>

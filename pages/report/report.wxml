@@ -1,0 +1,36 @@
+<view class="report-page">
+  <view class="report-nav">
+    <view class="back" bindtap="goBack">‹</view>
+    <view>月度馆藏报告</view>
+    <button class="share-top" open-type="share">分享</button>
+  </view>
+
+  <view class="report-sheet">
+    <view class="report-meta">
+      <text>LIFE MUSEUM</text>
+      <text>2024.07</text>
+    </view>
+    <view class="museum-mark">馆</view>
+    <view class="report-title">我在 7 月收藏了</view>
+    <view class="report-number"><text>12</text> 件展品</view>
+    <view class="ornament">——　◆　——</view>
+    <view class="report-slogan">每一个瞬间，都是生命的展品。</view>
+
+    <view class="moment-card">
+      <view class="moment-label">本月最珍贵的瞬间</view>
+      <image src="/assets/art/exhibit-city.jpg" mode="aspectFill"></image>
+      <view class="moment-quote">“傍晚的风，<br/>好像把一切都吹慢了。”</view>
+      <view class="moment-date">—— 7 月 14 日</view>
+    </view>
+
+    <view class="report-stats">
+      <view><text class="report-stat-label">已使用</text><text class="report-stat-number">2</text><text>分钟</text></view>
+      <view><text class="report-stat-label">记录天数</text><text class="report-stat-number">18</text><text>天</text></view>
+      <view><text class="report-stat-label">记录字数</text><text class="report-stat-number">5</text><text>字</text></view>
+    </view>
+    <view class="report-footer">
+      <view><text>人生博物馆</text><text class="english">Life Museum</text></view>
+      <view class="qr-demo">馆</view>
+    </view>
+  </view>
+</view>

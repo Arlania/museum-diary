@@ -1,0 +1,39 @@
+<view class="paper-page">
+  <view class="status-space"></view>
+  <view class="page-title">收藏一件展品</view>
+  <view class="page-subtitle">记录每一段独特的人生故事</view>
+
+  <view class="museum-card">
+    <view class="field-label">展品形式</view>
+    <view class="type-row">
+      <view wx:for="{{types}}" wx:key="id" class="type-chip {{type === item.id ? 'active' : ''}}" data-type="{{item.id}}" bindtap="chooseType">
+        <view class="type-icon">{{item.icon}}</view>
+        <text>{{item.name}}</text>
+      </view>
+    </view>
+
+    <view wx:if="{{type === 'photo'}}" class="upload-box" bindtap="chooseImage">
+      <image wx:if="{{image}}" src="{{image}}" mode="aspectFill"></image>
+      <view wx:else>
+        <view class="upload-plus">＋</view>
+        <view>选择一张照片</view>
+      </view>
+    </view>
+
+    <view wx:if="{{type === 'audio'}}" class="audio-box" bindtap="toggleRecord">
+      <view class="record-dot {{recording ? 'recording' : ''}}"></view>
+      <view>{{recording ? '正在录音，点击结束' : '点击开始录音'}}</view>
+    </view>
+
+    <input class="museum-input title-input" placeholder="为这件展品命名" value="{{title}}" bindinput="setTitle" />
+    <textarea class="museum-input story-input" placeholder="写下这件展品背后的故事……" value="{{story}}" bindinput="setStory"></textarea>
+    <view class="hall-select" bindtap="chooseHall">
+      <text>所属展厅</text><text>{{hall}}　›</text>
+    </view>
+  </view>
+
+  <button class="collect-button" bindtap="save">入藏</button>
+  <view class="cancel" bindtap="openHome">暂不记录</view>
+  <museum-nav active="record"></museum-nav>
+  <view wx:if="{{toast}}" class="toast">{{toast}}</view>
+</view>

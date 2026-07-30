@@ -1,0 +1,93 @@
+.summary-page {
+  min-height: 100vh;
+  padding: calc(70rpx + env(safe-area-inset-top)) 54rpx calc(150rpx + env(safe-area-inset-bottom));
+  box-sizing: border-box;
+  background: linear-gradient(145deg,#f8f4ee,#ebe2d7);
+}
+.page-title {
+  margin-bottom: 58rpx;
+  font-size: 58rpx;
+  letter-spacing: 8rpx;
+}
+.section-title {
+  margin-bottom: 22rpx;
+  font-size: 38rpx;
+  letter-spacing: 4rpx;
+}
+.summary-card {
+  position: relative;
+  min-height: 212rpx;
+  display: flex;
+  overflow: hidden;
+  border: 1rpx solid rgba(143,112,74,.28);
+  border-radius: 24rpx;
+  background: rgba(248,241,231,.82);
+  box-shadow: 0 14rpx 34rpx rgba(71,50,28,.1);
+}
+.card-copy {
+  flex: 1;
+  z-index: 2;
+  padding: 32rpx;
+}
+.summary-card image {
+  width: 40%;
+  min-height: 212rpx;
+  display: block;
+}
+.card-title, .date {
+  margin-bottom: 22rpx;
+  font-size: 38rpx;
+}
+.card-line {
+  margin-top: 13rpx;
+  font-size: 27rpx;
+}
+.card-arrow {
+  position: absolute;
+  right: 18rpx;
+  bottom: 14rpx;
+  width: 48rpx;
+  height: 48rpx;
+  line-height: 43rpx;
+  text-align: center;
+  border-radius: 50%;
+  background: rgba(246,239,228,.86);
+  color: #72562e;
+  font-size: 38rpx;
+}
+.today-title {
+  margin-top: 48rpx;
+}
+.memory, .quote {
+  margin-top: 12rpx;
+  font-size: 27rpx;
+  line-height: 1.55;
+}
+.insight-card {
+  margin-top: 46rpx;
+  padding: 28rpx;
+  border-radius: 24rpx;
+  background: linear-gradient(135deg,#d7c09b,#b79667);
+  border: 3rpx double rgba(118,79,29,.55);
+}
+.insight-heading {
+  text-align: center;
+  font-size: 30rpx;
+  letter-spacing: 4rpx;
+}
+.insight-stats {
+  margin-top: 24rpx;
+  display: flex;
+  justify-content: space-around;
+}
+.insight-stats view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+  font-size: 21rpx;
+}
+.insight-stats view text:first-child {
+  font-family: Georgia, serif;
+  font-size: 44rpx;
+}

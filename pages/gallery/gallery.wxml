@@ -1,0 +1,69 @@
+<view class="gallery-page">
+  <view class="page-head">
+    <view class="page-title">展厅</view>
+    <view class="section-line">
+      <view class="section-title">我的展厅</view>
+      <navigator class="manage-button" url="/pages/manage/manage">管理 ›</navigator>
+    </view>
+  </view>
+
+  <navigator class="main-hall" url="/pages/detail/detail?type=photo">
+    <image src="/assets/art/hall-main.jpg" mode="aspectFill"></image>
+    <view class="card-gradient"></view>
+    <view class="main-copy">
+      <view class="hall-name">主馆</view>
+      <view class="hall-meta">全部展品</view>
+      <view class="short-rule"></view>
+      <view class="hall-count">032 件展品</view>
+    </view>
+    <view class="round-arrow">›</view>
+  </navigator>
+
+  <view class="section-line sub-heading">
+    <view class="section-title small">副馆</view>
+    <view class="view-all" bindtap="viewAll">查看全部 ›</view>
+  </view>
+  <scroll-view class="hall-scroll" scroll-x="{{true}}" enable-flex="{{true}}" show-scrollbar="{{false}}">
+    <view class="hall-row">
+      <navigator
+        wx:for="{{subHalls}}"
+        wx:key="name"
+        class="hall-card"
+        url="/pages/detail/detail?type={{item.type}}"
+      >
+        <image src="{{item.image}}" mode="aspectFill"></image>
+        <view class="card-gradient"></view>
+        <view class="hall-card-copy">
+          <view>{{item.name}}</view>
+          <text>基于 {{item.count}} 件展品</text>
+        </view>
+        <view class="mini-arrow">›</view>
+      </navigator>
+    </view>
+  </scroll-view>
+
+  <view class="section-line recommend-heading">
+    <view class="section-title small">建议展厅</view>
+    <view class="recommend-note">根据你的馆藏生成</view>
+  </view>
+  <view class="recommend-grid">
+    <navigator
+      wx:for="{{recommendHalls}}"
+      wx:key="name"
+      class="recommend-card"
+      url="/pages/detail/detail?type={{item.type}}"
+    >
+      <image src="{{item.image}}" mode="aspectFill"></image>
+      <view class="recommend-overlay"></view>
+      <view class="recommend-copy">
+        <view>{{item.name}}</view>
+        <text>{{item.description}}</text>
+      </view>
+      <view class="recommend-count">{{item.count}} 件</view>
+    </navigator>
+  </view>
+
+  <view class="gallery-bottom-space"></view>
+  <museum-nav active="gallery"></museum-nav>
+  <view wx:if="{{toast}}" class="toast">{{toast}}</view>
+</view>

@@ -1,0 +1,182 @@
+.gallery-page {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: calc(65rpx + env(safe-area-inset-top)) 50rpx 0;
+  background: linear-gradient(145deg,#f7f2ea,#e9dfd2);
+}
+.page-title {
+  margin-bottom: 54rpx;
+  font-size: 58rpx;
+  letter-spacing: 6rpx;
+}
+.section-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.section-title {
+  font-size: 38rpx;
+  letter-spacing: 4rpx;
+}
+.section-title.small {
+  font-size: 34rpx;
+}
+.manage-button {
+  padding: 13rpx 24rpx;
+  border: 1rpx solid rgba(151,126,94,.35);
+  border-radius: 24rpx;
+  color: #665746;
+  font-size: 26rpx;
+}
+.main-hall {
+  position: relative;
+  height: 420rpx;
+  margin-top: 26rpx;
+  overflow: hidden;
+  border-radius: 22rpx;
+  color: #fff;
+  box-shadow: 0 18rpx 45rpx rgba(48,34,20,.18);
+}
+.main-hall image, .hall-card image, .recommend-card image {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.card-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,rgba(25,18,12,.52),rgba(30,22,15,.05) 72%,rgba(20,14,9,.16));
+}
+.main-copy {
+  position: absolute;
+  left: 38rpx;
+  bottom: 44rpx;
+}
+.hall-name {
+  font-size: 55rpx;
+}
+.hall-meta, .hall-count {
+  margin-top: 10rpx;
+  font-size: 27rpx;
+}
+.short-rule {
+  width: 40rpx;
+  height: 2rpx;
+  margin-top: 19rpx;
+  background: rgba(255,255,255,.85);
+}
+.round-arrow {
+  position: absolute;
+  right: 35rpx;
+  bottom: 35rpx;
+  width: 68rpx;
+  height: 68rpx;
+  border: 2rpx solid rgba(255,255,255,.9);
+  border-radius: 50%;
+  line-height: 62rpx;
+  text-align: center;
+  font-size: 55rpx;
+}
+.sub-heading {
+  margin-top: 54rpx;
+}
+.view-all {
+  color: #746552;
+  font-size: 26rpx;
+}
+.hall-scroll {
+  width: calc(100vw - 50rpx);
+  margin-top: 24rpx;
+  margin-right: -50rpx;
+}
+.hall-row {
+  display: flex;
+  gap: 22rpx;
+  padding-right: 50rpx;
+}
+.hall-card {
+  position: relative;
+  flex: none;
+  width: 250rpx;
+  height: 360rpx;
+  overflow: hidden;
+  border-radius: 18rpx;
+  color: #fff;
+}
+.hall-card .card-gradient {
+  background: linear-gradient(transparent 25%,rgba(20,15,10,.76));
+}
+.hall-card-copy {
+  position: absolute;
+  left: 22rpx;
+  right: 15rpx;
+  bottom: 60rpx;
+  font-size: 29rpx;
+}
+.hall-card-copy text {
+  display: block;
+  margin-top: 10rpx;
+  font-size: 22rpx;
+}
+.mini-arrow {
+  position: absolute;
+  right: 18rpx;
+  bottom: 15rpx;
+  width: 48rpx;
+  height: 48rpx;
+  border: 1rpx solid #fff;
+  border-radius: 50%;
+  line-height: 43rpx;
+  text-align: center;
+  font-size: 38rpx;
+}
+.recommend-heading {
+  margin-top: 62rpx;
+}
+.recommend-note {
+  color: #8b7a65;
+  font-size: 22rpx;
+}
+.recommend-grid {
+  margin-top: 24rpx;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22rpx;
+}
+.recommend-card {
+  position: relative;
+  height: 300rpx;
+  overflow: hidden;
+  border-radius: 18rpx;
+  color: #fff;
+}
+.recommend-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(transparent 20%,rgba(24,18,12,.8));
+}
+.recommend-copy {
+  position: absolute;
+  left: 22rpx;
+  right: 18rpx;
+  bottom: 24rpx;
+  font-size: 29rpx;
+}
+.recommend-copy text {
+  display: block;
+  margin-top: 8rpx;
+  color: rgba(255,255,255,.86);
+  font-size: 21rpx;
+}
+.recommend-count {
+  position: absolute;
+  top: 16rpx;
+  right: 16rpx;
+  padding: 6rpx 12rpx;
+  border-radius: 18rpx;
+  background: rgba(46,34,23,.55);
+  font-size: 20rpx;
+}
+.gallery-bottom-space {
+  height: calc(155rpx + env(safe-area-inset-bottom));
+}

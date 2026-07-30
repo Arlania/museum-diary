@@ -1,0 +1,23 @@
+.paper-page { min-height: 100vh; box-sizing: border-box; padding: 0 54rpx calc(150rpx + env(safe-area-inset-bottom)); background: linear-gradient(rgba(250,247,241,.82),rgba(238,228,215,.9)), repeating-linear-gradient(45deg,#eee5d8 0,#eee5d8 2rpx,#f5ede4 2rpx,#f5ede4 5rpx); }
+.status-space { height: 110rpx; }
+.page-title { font-size: 56rpx; letter-spacing: 6rpx; }
+.page-subtitle { margin-top: 18rpx; color: #7a6a58; font-size: 26rpx; }
+.museum-card { margin-top: 52rpx; padding: 38rpx; border: 1rpx solid rgba(151,119,76,.35); border-radius: 28rpx; background: rgba(249,244,235,.74); box-shadow: 0 18rpx 50rpx rgba(79,55,27,.12); }
+.field-label { margin-bottom: 22rpx; font-size: 28rpx; }
+.type-row { display: flex; gap: 18rpx; }
+.type-chip { flex: 1; padding: 20rpx 8rpx; text-align: center; border: 1rpx solid #c7b59d; border-radius: 18rpx; color: #766653; }
+.type-chip.active { color: #7d5824; border-color: #9f7436; background: #eee0c9; }
+.type-icon { font-size: 38rpx; margin-bottom: 8rpx; }
+.upload-box, .audio-box { height: 260rpx; margin: 30rpx 0; display: flex; align-items: center; justify-content: center; text-align: center; color: #85735e; border: 1rpx dashed #bda787; border-radius: 20rpx; overflow: hidden; }
+.upload-box image { width: 100%; height: 100%; }
+.upload-plus { font-size: 62rpx; }
+.audio-box { flex-direction: column; gap: 20rpx; }
+.record-dot { width: 70rpx; height: 70rpx; border-radius: 50%; background: #9b5a43; box-shadow: 0 0 0 16rpx rgba(155,90,67,.12); }
+.record-dot.recording { animation: pulse 1s infinite; }
+@keyframes pulse { 50% { transform: scale(.82); opacity: .68; } }
+.museum-input { width: 100%; box-sizing: border-box; border-bottom: 1rpx solid #c9bba8; }
+.title-input { height: 88rpx; font-size: 34rpx; }
+.story-input { height: 220rpx; padding-top: 28rpx; line-height: 1.8; }
+.hall-select { display: flex; justify-content: space-between; padding-top: 30rpx; }
+.collect-button { margin-top: 42rpx; height: 96rpx; line-height: 96rpx; border-radius: 12rpx; color: #fffaf0; background: linear-gradient(90deg,#85612e,#aa8147); letter-spacing: 10rpx; }
+.cancel { padding: 30rpx; text-align: center; color: #82715d; }
