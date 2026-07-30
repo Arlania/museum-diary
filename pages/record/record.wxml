@@ -1,39 +1,80 @@
-<view class="paper-page">
+<view class="record-page">
   <view class="status-space"></view>
-  <view class="page-title">收藏一件展品</view>
-  <view class="page-subtitle">记录每一段独特的人生故事</view>
 
-  <view class="museum-card">
-    <view class="field-label">展品形式</view>
-    <view class="type-row">
-      <view wx:for="{{types}}" wx:key="id" class="type-chip {{type === item.id ? 'active' : ''}}" data-type="{{item.id}}" bindtap="chooseType">
-        <view class="type-icon">{{item.icon}}</view>
-        <text>{{item.name}}</text>
+  <view class="page-head">
+    <view class="page-title">记录一件展品</view>
+    <view class="page-subtitle">把今天值得收藏的片刻，放进人生博物馆</view>
+  </view>
+
+  <picker
+    class="date-picker"
+    mode="date"
+    value="{{date}}"
+    start="1900-01-01"
+    end="2100-12-31"
+    bindchange="changeDate"
+  >
+    <view class="entry-card date-card">
+      <view class="section-label section-label-small">点击修改日期</view>
+      <view class="date-row">
+        <view class="calendar-icon">
+          <view class="calendar-rings"></view>
+          <text>{{day}}</text>
+        </view>
+        <view class="date-value">{{dateText}}</view>
+        <view class="date-arrow">⌄</view>
       </view>
     </view>
+  </picker>
 
-    <view wx:if="{{type === 'photo'}}" class="upload-box" bindtap="chooseImage">
-      <image wx:if="{{image}}" src="{{image}}" mode="aspectFill"></image>
-      <view wx:else>
-        <view class="upload-plus">＋</view>
-        <view>选择一张照片</view>
+  <view class="entry-card photo-card {{image ? 'has-photo' : ''}}" bindtap="chooseImage">
+    <view class="section-label">放点什么照片？</view>
+    <image wx:if="{{image}}" class="photo-preview" src="{{image}}" mode="aspectFill"></image>
+    <view wx:else class="photo-empty">
+      <view class="photo-plus">＋</view>
+      <view class="photo-hint">从相册选择或拍一张</view>
+    </view>
+    <view wx:if="{{image}}" class="replace-photo">轻触更换照片</view>
+  </view>
+
+  <view class="entry-card story-card">
+    <view class="section-label">写点什么？</view>
+    <view class="writing-area">
+      <view class="guide-lines" aria-hidden="true">
+        <view></view>
+        <view></view>
+        <view></view>
+        <view></view>
       </view>
-    </view>
-
-    <view wx:if="{{type === 'audio'}}" class="audio-box" bindtap="toggleRecord">
-      <view class="record-dot {{recording ? 'recording' : ''}}"></view>
-      <view>{{recording ? '正在录音，点击结束' : '点击开始录音'}}</view>
-    </view>
-
-    <input class="museum-input title-input" placeholder="为这件展品命名" value="{{title}}" bindinput="setTitle" />
-    <textarea class="museum-input story-input" placeholder="写下这件展品背后的故事……" value="{{story}}" bindinput="setStory"></textarea>
-    <view class="hall-select" bindtap="chooseHall">
-      <text>所属展厅</text><text>{{hall}}　›</text>
+      <textarea
+        class="story-input"
+        value="{{story}}"
+        maxlength="-1"
+        placeholder="这一刻，你想记住什么……"
+        placeholder-class="story-placeholder"
+        bindinput="setStory"
+      ></textarea>
     </view>
   </view>
 
-  <button class="collect-button" bindtap="save">入藏</button>
-  <view class="cancel" bindtap="openHome">暂不记录</view>
+  <view class="entry-card voice-card" bindtap="toggleRecord">
+    <view class="section-label">说点什么？</view>
+    <view class="voice-control {{recording ? 'is-recording' : ''}}">
+      <view class="microphone">
+        <view class="mic-head"></view>
+        <view class="mic-stem"></view>
+      </view>
+      <view class="waveform">
+        <view wx:for="{{waveBars}}" wx:key="*this" class="wave-bar wave-bar-{{index}}"></view>
+      </view>
+      <view class="voice-state">{{voiceState}}</view>
+    </view>
+  </view>
+
+  <button class="collect-button" bindtap="save">入馆</button>
+  <view class="save-note">内容将默认收藏到「主馆」</view>
+
+  <view class="bottom-space"></view>
   <museum-nav active="record"></museum-nav>
   <view wx:if="{{toast}}" class="toast">{{toast}}</view>
 </view>

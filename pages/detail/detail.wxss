@@ -67,7 +67,8 @@
   right: 0;
   text-align: center;
   color: #876438;
-  font-family: Georgia, serif;
+  font-family: var(--font-numeral);
+  font-weight: 400;
   font-size: 30rpx;
   letter-spacing: 2rpx;
 }

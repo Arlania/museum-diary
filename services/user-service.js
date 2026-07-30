@@ -1,0 +1,138 @@
+const storage = require('./storage-adapter')
+
+const USER_STORAGE_KEY = 'museum:user:v1'
+const DAY_IN_MS = 24 * 60 * 60 * 1000
+
+const normalizeUser = (user) => {
+  if (!user || !user.createdAt) return null
+
+  const normalizedUser = {
+    createdAt: user.createdAt,
+    items: Array.isArray(user.items) ? user.items : []
+  }
+
+  if (user.monthlyHighlights && typeof user.monthlyHighlights === 'object') {
+    normalizedUser.monthlyHighlights = user.monthlyHighlights
+  }
+
+  return normalizedUser
+}
+
+const getUser = async () => {
+  const storedUser = await storage.get(USER_STORAGE_KEY)
+  return normalizeUser(storedUser)
+}
+
+const saveUser = async (user) => {
+  const normalizedUser = normalizeUser(user)
+  if (!normalizedUser) throw new Error('Invalid user data')
+
+  await storage.set(USER_STORAGE_KEY, normalizedUser)
+  return normalizedUser
+}
+
+const loginWithWechat = () => new Promise((resolve, reject) => {
+  wx.login({
+    success: resolve,
+    fail: reject
+  })
+})
+
+const createUser = async () => {
+  await loginWithWechat()
+
+  return saveUser({
+    createdAt: new Date().toISOString(),
+    items: []
+  })
+}
+
+const addItem = async (item) => {
+  const user = await getUser()
+  if (!user) throw new Error('User not found')
+
+  const updatedUser = {
+    ...user,
+    items: [item, ...user.items]
+  }
+
+  await saveUser(updatedUser)
+  return updatedUser
+}
+
+const getMonthKey = (date = new Date()) => {
+  const value = new Date(date)
+  const month = String(value.getMonth() + 1).padStart(2, '0')
+  return `${value.getFullYear()}-${month}`
+}
+
+const getItemsForMonth = (user, monthKey = getMonthKey()) => {
+  const normalizedUser = normalizeUser(user)
+  if (!normalizedUser) return []
+
+  return normalizedUser.items.filter((item) => {
+    const itemDate = item.date || item.createdAt
+    return typeof itemDate === 'string' && itemDate.slice(0, 7) === monthKey
+  })
+}
+
+const getMonthlyHighlight = (user, monthKey = getMonthKey()) => {
+  const normalizedUser = normalizeUser(user)
+  return normalizedUser?.monthlyHighlights?.[monthKey] || null
+}
+
+const saveMonthlyHighlight = async (monthKey, highlight) => {
+  const user = await getUser()
+  if (!user) throw new Error('User not found')
+
+  const updatedUser = {
+    ...user,
+    monthlyHighlights: {
+      ...(user.monthlyHighlights || {}),
+      [monthKey]: highlight
+    }
+  }
+
+  await saveUser(updatedUser)
+  return updatedUser
+}
+
+const getCollectionCount = (user) => {
+  return normalizeUser(user)?.items.length || 0
+}
+
+const getLocalCalendarIndex = (value) => {
+  const date = new Date(value)
+  return Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
+}
+
+const getMuseumDays = (user, today = new Date()) => {
+  const normalizedUser = normalizeUser(user)
+  if (!normalizedUser) return 0
+
+  const createdDay = getLocalCalendarIndex(normalizedUser.createdAt)
+  const currentDay = getLocalCalendarIndex(today)
+  const elapsedDays = Math.floor((currentDay - createdDay) / DAY_IN_MS)
+
+  return Math.max(1, elapsedDays + 1)
+}
+
+const formatStat = (value) => {
+  const safeValue = Math.max(0, Number(value) || 0)
+  return String(safeValue).padStart(3, '0')
+}
+
+module.exports = {
+  USER_STORAGE_KEY,
+  getUser,
+  saveUser,
+  createUser,
+  addItem,
+  getMonthKey,
+  getItemsForMonth,
+  getMonthlyHighlight,
+  saveMonthlyHighlight,
+  getCollectionCount,
+  getMuseumDays,
+  formatStat
+}

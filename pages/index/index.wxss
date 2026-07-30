@@ -21,17 +21,6 @@
   background: linear-gradient(rgba(239,225,204,.12), rgba(71,48,23,.03) 62%, rgba(61,41,20,.22));
   pointer-events: none;
 }
-.settings {
-  position: absolute;
-  top: calc(38rpx + env(safe-area-inset-top));
-  left: 34rpx;
-  width: 72rpx;
-  height: 72rpx;
-  line-height: 72rpx;
-  text-align: center;
-  font-size: 48rpx;
-  color: #3a332a;
-}
 .museum-title {
   position: absolute;
   top: calc(115rpx + env(safe-area-inset-top));
@@ -41,12 +30,11 @@
   color: #29241e;
   font-size: 48rpx;
   letter-spacing: 8rpx;
-  text-shadow: 0 2rpx 8rpx rgba(247,236,217,.95);
 }
 .museum-title text {
   display: block;
   margin-top: 8rpx;
-  font-family: Georgia, serif;
+  font-family: inherit;
   font-size: 28rpx;
   font-style: italic;
   letter-spacing: 1rpx;
@@ -108,7 +96,8 @@
 }
 .stat-number {
   margin-right: 10rpx;
-  font-family: Georgia, serif;
+  font-family: var(--font-numeral);
+  font-weight: 400;
   font-size: 58rpx;
   letter-spacing: 6rpx;
 }

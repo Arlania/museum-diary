@@ -88,6 +88,7 @@
   font-size: 21rpx;
 }
 .insight-stats view text:first-child {
-  font-family: Georgia, serif;
+  font-family: var(--font-numeral);
+  font-weight: 400;
   font-size: 44rpx;
 }
