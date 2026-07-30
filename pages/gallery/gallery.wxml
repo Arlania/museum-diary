@@ -7,14 +7,14 @@
     </view>
   </view>
 
-  <navigator class="main-hall" url="/pages/detail/detail?type=photo">
+  <navigator class="main-hall" url="{{mainHallUrl}}">
     <image src="/assets/art/hall-main.jpg" mode="aspectFill"></image>
     <view class="card-gradient"></view>
     <view class="main-copy">
       <view class="hall-name">主馆</view>
       <view class="hall-meta">全部展品</view>
       <view class="short-rule"></view>
-      <view class="hall-count">032 件展品</view>
+      <view class="hall-count">{{mainHallCount}} 件展品</view>
     </view>
     <view class="round-arrow">›</view>
   </navigator>

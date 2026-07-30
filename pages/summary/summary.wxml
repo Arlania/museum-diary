@@ -4,9 +4,9 @@
   <view class="section-title">月度馆藏报告</view>
   <navigator class="summary-card month-card" url="/pages/report/report">
     <view class="card-copy">
-      <view class="card-title">7 月馆藏报告</view>
-      <view class="card-line">共入藏 12 件藏品</view>
-      <view class="card-line">回顾你的七月</view>
+      <view class="card-title">{{monthName}}馆藏报告</view>
+      <view class="card-line">共入藏 {{monthlyItemCount}} 件藏品</view>
+      <view class="card-line">回顾你的这个月</view>
     </view>
     <image src="/assets/art/month-book.jpg" mode="aspectFill"></image>
     <view class="card-arrow">›</view>

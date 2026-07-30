@@ -1,13 +1,59 @@
 page {
+  --font-display: "Source Han Serif SC", "Source Han Serif CN", "Noto Serif SC", "Noto Serif CJK SC", serif;
+  --font-body: var(--font-display);
+  --font-numeral: "Baskerville", "Iowan Old Style", "Times New Roman", serif;
   width: 100%;
   height: 100%;
   background: #eee7de;
   color: #2e2a24;
-  font-family: "Songti SC", "STSong", serif;
+  font-family: var(--font-body);
+  font-weight: 400;
 }
 
-button {
-  font-family: inherit;
+view,
+text,
+input,
+textarea,
+button,
+picker,
+navigator {
+  font-family: var(--font-body);
+  font-weight: inherit;
+}
+
+.museum-title,
+.page-title,
+.section-title,
+.card-title,
+.hall-name,
+.collect-title,
+.detail-nav-title,
+.exhibit-title,
+.scroll-title,
+.report-title,
+.insight-heading,
+.section-label,
+.name,
+.moment-label,
+.manage-nav > view:nth-child(2),
+.report-nav > view:nth-child(2),
+.hall-copy > view:first-child,
+.hall-card-copy > view:first-child,
+.recommend-copy > view:first-child {
+  font-family: var(--font-display);
+  font-weight: 500;
+}
+
+.stat-number,
+.number,
+.exhibit-number,
+.date-value,
+.date,
+.report-number text,
+.report-stat-number,
+.insight-stats view text:first-child {
+  font-family: var(--font-numeral);
+  font-weight: 400;
 }
 
 .screen {

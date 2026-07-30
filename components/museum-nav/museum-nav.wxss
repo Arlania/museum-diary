@@ -11,6 +11,8 @@
   background: rgba(248, 243, 235, .97);
   border-top: 1rpx solid rgba(139, 111, 76, .22);
   box-shadow: 0 -10rpx 30rpx rgba(66, 45, 23, .08);
+  font-family: var(--font-display, "Source Han Serif SC", "Noto Serif SC", serif);
+  font-weight: 400;
 }
 .nav-item {
   flex: 1;
@@ -35,7 +37,7 @@
 }
 .nav-item.active {
   color: #8b642a;
-  font-weight: 600;
+  font-weight: 500;
 }
 .nav-hover {
   background: rgba(149, 111, 57, .08);

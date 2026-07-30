@@ -1,29 +1,29 @@
 {
-  "appid": "wx77faff1a57b51e70",
+  "appid": "wx2fa2d034fa861278",
   "compileType": "miniprogram",
   "miniprogramRoot": "./",
-  "libVersion": "latest",
+  "libVersion": "3.16.2",
   "packOptions": {
     "ignore": [
       {
-        "type": "folder",
-        "value": "miniprogram_npm"
+        "value": "miniprogram_npm",
+        "type": "folder"
       },
       {
-        "type": "folder",
-        "value": "pages/list"
+        "value": "pages/list",
+        "type": "folder"
       },
       {
-        "type": "folder",
-        "value": "pages/content1"
+        "value": "pages/content1",
+        "type": "folder"
       },
       {
-        "type": "folder",
-        "value": "assets/design"
+        "value": "assets/design",
+        "type": "folder"
       },
       {
-        "type": "folder",
-        "value": "assets/screen"
+        "value": "assets/screen",
+        "type": "folder"
       }
     ],
     "include": []
