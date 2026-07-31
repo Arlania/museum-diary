@@ -6,34 +6,42 @@
   </view>
 
   <view class="gallery-light">
-    <view class="lamp"></view>
-    <view class="light-cone"></view>
-    <view class="exhibit-number">No. 0021</view>
-
     <view wx:if="{{type === 'photo'}}" class="photo-exhibit">
-      <view class="rope"></view>
-      <view class="photo-frame">
-        <image src="{{record && record.image ? record.image : '/assets/art/exhibit-city.jpg'}}" mode="aspectFill"></image>
-      </view>
-      <view class="description-card">
-        <view class="exhibit-title">{{record ? record.title : '傍晚的城市'}}</view>
-        <view class="exhibit-date">{{displayDate}} 入藏</view>
-        <view class="tiny-ornament">— ◇ —</view>
-        <view wx:if="{{record}}" class="exhibit-description">{{record.story || '这一刻被收藏进了人生博物馆。'}}</view>
-        <view wx:else class="exhibit-description">黄昏将城市温柔地包裹，<br/>灯火初上时，天空像被熔金洒了一层光。</view>
-        <view class="hall-link">所属展厅 <text>{{record ? record.hall : '主馆'}}　›</text></view>
+      <view class="gallery-ceiling"></view>
+      <view class="spotlight-fixture"><view class="spotlight-rim"></view><view class="spotlight-bulb"></view></view>
+      <view class="spotlight-beam"></view>
+
+      <view class="photo-scene-content">
+        <view class="exhibit-number">No. {{exhibitNumber}}</view>
+        <view class="museum-frame">
+          <view class="frame-bevel">
+            <view class="frame-mat">
+              <view class="photo-window">
+                <image wx:if="{{record && record.image}}" src="{{record.image}}" mode="aspectFill"></image>
+                <view wx:else class="empty-exhibit">尚未放入照片</view>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <view class="detail-placard">
+          <view class="placard-inner">
+            <view class="exhibit-title">{{record && record.title ? record.title : '未命名展品'}}</view>
+            <view wx:if="{{record && record.date}}" class="exhibit-date">{{displayDate}} 入藏</view>
+            <view class="tiny-ornament">— ◇ —</view>
+            <view wx:if="{{record && record.story}}" class="exhibit-description">{{record.story}}</view>
+            <view class="hall-link">所属展厅 <text>{{record && record.hall ? record.hall : '主馆'}}　›</text></view>
+          </view>
+        </view>
       </view>
     </view>
 
-    <view wx:if="{{type === 'text'}}" class="text-exhibit">
-      <view class="rope"></view>
+    <view wx:if="{{type === 'text'}}" class="text-exhibit secondary-exhibit">
       <view class="scroll-paper">
         <view class="scroll-title">{{record ? record.title : '那些突然照亮我的瞬间'}}</view>
         <view class="tiny-ornament">— ◇ —</view>
         <view class="exhibit-date">{{displayDate}} 入藏</view>
-        <view wx:if="{{record}}" class="story">
-          <text>{{record.story}}</text>
-        </view>
+        <view wx:if="{{record}}" class="story"><text>{{record.story}}</text></view>
         <view wx:else class="story">
           <text>傍晚从图书馆回家的路上，天空被落日染成了橘红色。</text>
           <text>风很轻，树叶沙沙响，城市好像也慢了下来。</text>
@@ -43,7 +51,7 @@
       </view>
     </view>
 
-    <view wx:if="{{type === 'audio'}}" class="audio-exhibit">
+    <view wx:if="{{type === 'audio'}}" class="audio-exhibit secondary-exhibit">
       <view class="gramophone-frame" bindtap="toggleAudio">
         <image src="/assets/art/gramophone.jpg" mode="aspectFill"></image>
         <view class="play-button">{{playing ? 'Ⅱ' : '▶'}}</view>
@@ -61,7 +69,7 @@
 
   <view class="detail-actions">
     <button open-type="share"><view class="action-icon">↗</view><text>分享</text></button>
-    <view class="action-button" bindtap="comment"><view class="action-icon">○</view><text>留言 3</text></view>
+    <view class="action-button" bindtap="comment"><view class="action-icon">○</view><text>留言</text></view>
     <view class="action-button" bindtap="showActions"><view class="action-icon">•••</view><text>更多</text></view>
   </view>
   <view wx:if="{{toast}}" class="toast">{{toast}}</view>
