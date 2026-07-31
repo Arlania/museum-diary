@@ -51,5 +51,6 @@
     </view>
   </view>
 
+  <museum-guide></museum-guide>
   <museum-nav active="summary"></museum-nav>
 </view>
