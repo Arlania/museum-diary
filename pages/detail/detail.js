@@ -6,11 +6,36 @@ Page({
     record: null,
     displayDate: '',
     exhibitNumber: '----',
+    statusBarHeight: 20,
+    navigationBarHeight: 44,
+    textGalleryHeight: 600,
     playing: false,
     deleting: false,
     toast: ''
   },
   async onLoad(options) {
+    const windowInfo = wx.getWindowInfo
+      ? wx.getWindowInfo()
+      : wx.getSystemInfoSync()
+    const statusBarHeight = windowInfo.statusBarHeight || 20
+    let navigationBarHeight = 44
+
+    if (wx.getMenuButtonBoundingClientRect) {
+      const capsule = wx.getMenuButtonBoundingClientRect()
+      if (capsule && capsule.top && capsule.height) {
+        navigationBarHeight = (capsule.top - statusBarHeight) * 2 + capsule.height
+      }
+    }
+
+    this.setData({
+      statusBarHeight,
+      navigationBarHeight: Math.max(40, navigationBarHeight),
+      textGalleryHeight: Math.max(
+        420,
+        windowInfo.windowHeight - statusBarHeight - Math.max(40, navigationBarHeight)
+      )
+    })
+
     const user = await getUser()
     const record = options.id && user
       ? user.items.find((item) => item.id === options.id)
