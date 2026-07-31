@@ -19,8 +19,7 @@
   "style": "v2",
   "componentFramework": "glass-easel",
   "usingComponents": {
-    "museum-nav": "/components/museum-nav/museum-nav",
-    "museum-guide": "/components/museum-guide/museum-guide"
+    "museum-nav": "/components/museum-nav/museum-nav"
   },
   "sitemapLocation": "sitemap.json",
   "lazyCodeLoading": "requiredComponents"
