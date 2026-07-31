@@ -1,40 +1,138 @@
 const {
   getUser,
+  createHall,
   getCollectionCount,
   formatStat
 } = require('../../services/user-service')
 
+const getHallItems = (user, hall) => {
+  return user.items.filter((item) => item.hallId === hall.id || item.hall === hall.name)
+}
+
 Page({
   data: {
     mainHallCount: '000',
-    mainHallUrl: '/pages/hall/hall',
-    toast: '',
-    subHalls: [
-      { name: '夏日碎片', count: 12, type: 'text', image: '/assets/art/hall-summer.jpg' },
-      { name: '与朋友们的时光', count: 8, type: 'audio', image: '/assets/art/hall-friends.jpg' },
-      { name: '旅行收藏夹', count: 6, type: 'photo', image: '/assets/art/hall-travel.jpg' }
-    ],
-    recommendHalls: [
-      { name: '温柔的黄昏', description: '晚霞与回家的路', count: 5, type: 'photo', image: '/assets/art/today-city.jpg' },
-      { name: '想说的话', description: '留给未来的声音', count: 4, type: 'audio', image: '/assets/art/gramophone.jpg' },
-      { name: '日常微光', description: '被忽略的小小幸福', count: 7, type: 'text', image: '/assets/art/home-hero.jpg' },
-      { name: '远方来信', description: '旅途中珍藏的片刻', count: 6, type: 'photo', image: '/assets/art/hall-travel.jpg' }
-    ]
+    mainHallUrl: '/pages/record/record?new=1',
+    subHalls: [],
+    coverOptions: [],
+    creatorVisible: false,
+    hallName: '',
+    hallDescription: '',
+    selectedCover: '',
+    creating: false,
+    toast: ''
   },
+
   async onShow() {
+    await this.loadGallery()
+  },
+
+  async loadGallery() {
     const user = await getUser()
     if (!user) {
       wx.reLaunch({ url: '/pages/onboarding/onboarding' })
       return
     }
 
+    const latest = user.items[0]
+    const coverOptions = user.items
+      .filter((item) => item.image)
+      .reduce((images, item) => images.includes(item.image) ? images : [...images, item.image], [])
+      .slice(0, 12)
+    const subHalls = user.halls.map((hall) => {
+      const items = getHallItems(user, hall)
+      const firstPhoto = items.find((item) => item.image)
+      return {
+        ...hall,
+        count: items.length,
+        displayCover: hall.coverImage || (firstPhoto ? firstPhoto.image : ''),
+        firstItem: items[0] || null
+      }
+    })
+
     this.setData({
       mainHallCount: formatStat(getCollectionCount(user)),
-      mainHallUrl: '/pages/hall/hall'
+      mainHallUrl: latest
+        ? `/pages/detail/detail?type=${latest.type}&id=${latest.id}`
+        : '/pages/record/record?new=1',
+      subHalls,
+      coverOptions
     })
   },
-  viewAll() {
-    this.setData({ toast: '已展示全部副馆' })
-    setTimeout(() => this.setData({ toast: '' }), 1600)
+
+  openCreator() {
+    this.setData({
+      creatorVisible: true,
+      hallName: '',
+      hallDescription: '',
+      selectedCover: '',
+      creating: false
+    })
+  },
+
+  closeCreator() {
+    if (this.data.creating) return
+    this.setData({ creatorVisible: false })
+  },
+
+  noop() {},
+
+  updateHallName(e) {
+    this.setData({ hallName: e.detail.value })
+  },
+
+  updateHallDescription(e) {
+    this.setData({ hallDescription: e.detail.value })
+  },
+
+  chooseDefaultCover() {
+    this.setData({ selectedCover: '' })
+  },
+
+  chooseCover(e) {
+    this.setData({ selectedCover: e.currentTarget.dataset.image })
+  },
+
+  async submitHall() {
+    const hallName = this.data.hallName.trim()
+    if (!hallName) {
+      this.notice('请先为副馆取一个名字')
+      return
+    }
+    if (this.data.creating) return
+
+    this.setData({ creating: true })
+    try {
+      await createHall({
+        name: hallName,
+        description: this.data.hallDescription,
+        coverImage: this.data.selectedCover
+      })
+      this.setData({ creatorVisible: false, creating: false })
+      await this.loadGallery()
+      this.notice('副馆已创建')
+    } catch (error) {
+      this.setData({ creating: false })
+      this.notice(error.message === 'Hall name already exists' ? '已经有同名副馆了' : '创建失败，请重试')
+    }
+  },
+
+  openHall(e) {
+    const hall = this.data.subHalls[e.currentTarget.dataset.index]
+    if (!hall) return
+
+    if (!hall.firstItem) {
+      this.notice('副馆已建好，暂时还没有展品')
+      return
+    }
+
+    wx.navigateTo({
+      url: `/pages/detail/detail?type=${hall.firstItem.type}&id=${hall.firstItem.id}`
+    })
+  },
+
+  notice(toast) {
+    this.setData({ toast })
+    setTimeout(() => this.setData({ toast: '' }), 1800)
   }
 })
