@@ -22,7 +22,6 @@ const splitSentences = (value) => {
 Page({
   data: {
     monthKey: '',
-    requestedMonthKey: '',
     monthText: '',
     monthName: '',
     monthlyItemCount: 0,
@@ -39,11 +38,7 @@ Page({
     toast: ''
   },
 
-  async onLoad(options = {}) {
-    const requestedMonthKey = /^\d{4}-(0[1-9]|1[0-2])$/.test(options.month || '')
-      ? options.month
-      : getMonthKey()
-    this.setData({ requestedMonthKey })
+  async onLoad() {
     await this.loadReport()
   },
 
@@ -58,7 +53,7 @@ Page({
       return
     }
 
-    const monthKey = this.data.requestedMonthKey || getMonthKey()
+    const monthKey = getMonthKey()
     const monthItems = getItemsForMonth(user, monthKey)
     const photoOptions = monthItems
       .filter((item) => item.image)
@@ -159,7 +154,7 @@ Page({
   onShareAppMessage() {
     return {
       title: `我的 ${this.data.monthName || ''}人生博物馆报告`,
-      path: `/pages/report/report?month=${this.data.monthKey || getMonthKey()}`
+      path: '/pages/report/report'
     }
   }
 })
