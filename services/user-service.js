@@ -8,8 +8,7 @@ const normalizeUser = (user) => {
 
   const normalizedUser = {
     createdAt: user.createdAt,
-    items: Array.isArray(user.items) ? user.items : [],
-    halls: Array.isArray(user.halls) ? user.halls : []
+    items: Array.isArray(user.items) ? user.items : []
   }
 
   if (user.monthlyHighlights && typeof user.monthlyHighlights === 'object') {
@@ -59,33 +58,6 @@ const addItem = async (item) => {
 
   await saveUser(updatedUser)
   return updatedUser
-}
-
-const createHall = async ({ name, description = '', coverImage = '' }) => {
-  const user = await getUser()
-  if (!user) throw new Error('User not found')
-
-  const normalizedName = String(name || '').trim()
-  if (!normalizedName) throw new Error('Hall name is required')
-  if (user.halls.some((hall) => hall.name === normalizedName)) {
-    throw new Error('Hall name already exists')
-  }
-
-  const hall = {
-    id: `hall_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
-    name: normalizedName,
-    description: String(description || '').trim(),
-    coverImage: String(coverImage || ''),
-    createdAt: new Date().toISOString()
-  }
-
-  const updatedUser = {
-    ...user,
-    halls: [...user.halls, hall]
-  }
-
-  await saveUser(updatedUser)
-  return hall
 }
 
 const deleteItem = async (itemId) => {
@@ -180,7 +152,6 @@ module.exports = {
   saveUser,
   createUser,
   addItem,
-  createHall,
   deleteItem,
   getMonthKey,
   getItemsForMonth,

@@ -1,5 +1,4 @@
 const { getUser, createUser } = require('../../services/user-service')
-const { startTutorial } = require('../../services/tutorial-service')
 
 Page({
   data: {
@@ -28,7 +27,6 @@ Page({
 
     try {
       await createUser()
-      await startTutorial()
       wx.hideLoading()
       wx.reLaunch({ url: '/pages/index/index' })
     } catch (error) {
