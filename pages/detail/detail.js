@@ -1,13 +1,11 @@
-const { getUser, deleteItem } = require('../../services/user-service')
+const { getUser } = require('../../services/user-service')
 
 Page({
   data: {
     type: 'photo',
     record: null,
-    displayDate: '',
-    exhibitNumber: '----',
+    displayDate: '2024.07.21',
     playing: false,
-    deleting: false,
     toast: ''
   },
   async onLoad(options) {
@@ -16,13 +14,9 @@ Page({
     const record = options.id && user
       ? user.items.find((item) => item.id === options.id)
       : null
-    const displayDate = record && record.date ? record.date.replace(/-/g, '.') : ''
-    const recordIndex = record && user ? user.items.findIndex((item) => item.id === record.id) : -1
-    const exhibitNumber = recordIndex >= 0
-      ? String(user.items.length - recordIndex).padStart(4, '0')
-      : '----'
+    const displayDate = record ? record.date.replace(/-/g, '.') : '2024.07.21'
 
-    this.setData({ type, record, displayDate, exhibitNumber })
+    this.setData({ type, record, displayDate })
 
     if (record && record.audio && wx.createInnerAudioContext) {
       this.audioContext = wx.createInnerAudioContext()
@@ -63,37 +57,8 @@ Page({
   },
   showActions() {
     wx.showActionSheet({
-      itemList: ['编辑展品', '移动到其他展厅', '删除展品'],
-      success: ({ tapIndex }) => {
-        if (tapIndex === 0) this.notice('进入编辑模式')
-        if (tapIndex === 1) this.notice('请选择目标展厅')
-        if (tapIndex === 2) this.confirmDelete()
-      }
-    })
-  },
-  confirmDelete() {
-    const record = this.data.record
-    if (!record || !record.id || this.data.deleting) return
-
-    wx.showModal({
-      title: '删除展品',
-      content: '确定要删除吗？删除后无法恢复。',
-      cancelText: '取消',
-      confirmText: '删除',
-      confirmColor: '#8a5d3b',
-      success: async ({ confirm }) => {
-        if (!confirm || this.data.deleting) return
-
-        this.setData({ deleting: true })
-        try {
-          await deleteItem(record.id)
-          wx.showToast({ title: '展品已删除', icon: 'success' })
-          setTimeout(() => wx.navigateBack(), 600)
-        } catch (error) {
-          this.setData({ deleting: false })
-          this.notice('删除失败，请重试')
-        }
-      }
+      itemList: ['编辑展品', '移动到其他展厅', '保存图片', '删除展品'],
+      success: ({ tapIndex }) => this.notice(['进入编辑模式', '请选择目标展厅', '已保存到相册', '演示版未执行删除'][tapIndex])
     })
   },
   notice(toast) {

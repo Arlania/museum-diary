@@ -60,30 +60,6 @@ const addItem = async (item) => {
   return updatedUser
 }
 
-const deleteItem = async (itemId) => {
-  const user = await getUser()
-  if (!user) throw new Error('User not found')
-  if (!itemId) throw new Error('Item id is required')
-
-  const items = user.items.filter((item) => item.id !== itemId)
-  if (items.length === user.items.length) throw new Error('Item not found')
-
-  const monthlyHighlights = Object.keys(user.monthlyHighlights || {}).reduce((result, monthKey) => {
-    const highlight = user.monthlyHighlights[monthKey]
-    if (!highlight || highlight.itemId !== itemId) result[monthKey] = highlight
-    return result
-  }, {})
-
-  const updatedUser = {
-    ...user,
-    items,
-    monthlyHighlights
-  }
-
-  await saveUser(updatedUser)
-  return updatedUser
-}
-
 const getMonthKey = (date = new Date()) => {
   const value = new Date(date)
   const month = String(value.getMonth() + 1).padStart(2, '0')
@@ -152,7 +128,6 @@ module.exports = {
   saveUser,
   createUser,
   addItem,
-  deleteItem,
   getMonthKey,
   getItemsForMonth,
   getMonthlyHighlight,
