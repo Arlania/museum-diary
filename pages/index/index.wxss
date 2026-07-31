@@ -1,6 +1,6 @@
 .home-page {
   min-height: 100vh;
-  padding-bottom: calc(112rpx + env(safe-area-inset-bottom));
+  padding-bottom: 120rpx;
   box-sizing: border-box;
   background: #d5c1a7;
 }

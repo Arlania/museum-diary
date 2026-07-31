@@ -1,6 +1,6 @@
 .summary-page {
   height: 100vh;
-  padding: calc(70rpx + env(safe-area-inset-top)) 42rpx calc(152rpx + env(safe-area-inset-bottom));
+  padding: calc(70rpx + env(safe-area-inset-top)) 42rpx 120rpx;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;

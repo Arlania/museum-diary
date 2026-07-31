@@ -178,5 +178,5 @@
   font-size: 20rpx;
 }
 .gallery-bottom-space {
-  height: calc(155rpx + env(safe-area-inset-bottom));
+  height: 120rpx;
 }

@@ -1,7 +1,7 @@
 .record-page {
   min-height: 100vh;
   box-sizing: border-box;
-  padding: 0 38rpx calc(128rpx + env(safe-area-inset-bottom));
+  padding: 0 38rpx 120rpx;
   color: #332b23;
   background:
     linear-gradient(rgba(250, 247, 241, .9), rgba(238, 228, 215, .94)),

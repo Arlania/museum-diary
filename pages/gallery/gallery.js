@@ -7,7 +7,7 @@ const {
 Page({
   data: {
     mainHallCount: '000',
-    mainHallUrl: '/pages/record/record?new=1',
+    mainHallUrl: '/pages/hall/hall',
     toast: '',
     subHalls: [
       { name: '夏日碎片', count: 12, type: 'text', image: '/assets/art/hall-summer.jpg' },
@@ -28,12 +28,9 @@ Page({
       return
     }
 
-    const latest = user.items[0]
     this.setData({
       mainHallCount: formatStat(getCollectionCount(user)),
-      mainHallUrl: latest
-        ? `/pages/detail/detail?type=${latest.type}&id=${latest.id}`
-        : '/pages/record/record?new=1'
+      mainHallUrl: '/pages/hall/hall'
     })
   },
   viewAll() {
