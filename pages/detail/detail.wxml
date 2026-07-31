@@ -1,8 +1,10 @@
-<view class="detail-page">
-  <view class="detail-nav">
-    <view class="back" bindtap="goBack">‹</view>
-    <view class="detail-nav-title">展品详情</view>
-    <view class="top-more" bindtap="showActions">•••</view>
+<view class="detail-page {{type === 'text' ? 'static-detail' : ''}}">
+  <view class="detail-nav" style="padding-top: {{statusBarHeight}}px;">
+    <view class="detail-nav-row" style="height: {{navigationBarHeight}}px;">
+      <view class="back" bindtap="goBack">‹</view>
+      <view class="detail-nav-title">展品详情</view>
+      <view class="top-more" bindtap="showActions">•••</view>
+    </view>
   </view>
 
   <view class="gallery-light">
@@ -36,17 +38,27 @@
       </view>
     </view>
 
-    <view wx:if="{{type === 'text'}}" class="text-exhibit secondary-exhibit">
-      <view class="scroll-paper">
-        <view class="scroll-title">{{record ? record.title : '那些突然照亮我的瞬间'}}</view>
-        <view class="tiny-ornament">— ◇ —</view>
-        <view class="exhibit-date">{{displayDate}} 入藏</view>
-        <view wx:if="{{record}}" class="story"><text>{{record.story}}</text></view>
-        <view wx:else class="story">
-          <text>傍晚从图书馆回家的路上，天空被落日染成了橘红色。</text>
-          <text>风很轻，树叶沙沙响，城市好像也慢了下来。</text>
-          <text>那一刻突然觉得，平凡的一天也可以这么美。</text>
-          <text>原来幸福不是很大的事情，而是这些被忽略的、微小的瞬间。</text>
+    <view wx:if="{{type === 'text'}}" class="text-exhibit" style="height: {{textGalleryHeight}}px;">
+      <view class="gallery-ceiling"></view>
+      <view class="spotlight-fixture"><view class="spotlight-rim"></view><view class="spotlight-bulb"></view></view>
+      <view class="spotlight-beam text-beam"></view>
+
+      <view class="text-scene-content">
+        <view class="exhibit-number">No. {{exhibitNumber}}</view>
+        <view class="scroll-paper">
+          <view class="paper-roll paper-roll-top"></view>
+          <view class="exhibit-date">{{displayDate}} 入藏</view>
+          <view class="tiny-ornament">— ◇ —</view>
+          <scroll-view class="story-scroll" scroll-y="{{true}}" enhanced="{{true}}" show-scrollbar="{{false}}">
+            <view wx:if="{{record}}" class="story"><text>{{record.story}}</text></view>
+            <view wx:else class="story">
+              <text>傍晚从图书馆回家的路上，天空被落日染成了橘红色。</text>
+              <text>风很轻，树叶沙沙响，城市好像也慢了下来。</text>
+              <text>那一刻突然觉得，平凡的一天也可以这么美。</text>
+              <text>原来幸福不是很大的事情，而是这些被忽略的、微小的瞬间。</text>
+            </view>
+          </scroll-view>
+          <view class="paper-roll paper-roll-bottom"></view>
         </view>
       </view>
     </view>
@@ -67,7 +79,7 @@
     </view>
   </view>
 
-  <view class="detail-actions">
+  <view class="detail-actions showcase-actions">
     <button open-type="share"><view class="action-icon">↗</view><text>分享</text></button>
     <view class="action-button" bindtap="comment"><view class="action-icon">○</view><text>留言</text></view>
     <view class="action-button" bindtap="showActions"><view class="action-icon">•••</view><text>更多</text></view>
