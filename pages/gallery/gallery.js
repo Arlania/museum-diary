@@ -12,7 +12,7 @@ const getHallItems = (user, hall) => {
 Page({
   data: {
     mainHallCount: '000',
-    mainHallUrl: '/pages/record/record?new=1',
+    mainHallUrl: '/pages/hall/hall',
     subHalls: [],
     coverOptions: [],
     creatorVisible: false,
@@ -34,7 +34,6 @@ Page({
       return
     }
 
-    const latest = user.items[0]
     const coverOptions = user.items
       .filter((item) => item.image)
       .reduce((images, item) => images.includes(item.image) ? images : [...images, item.image], [])
@@ -52,9 +51,7 @@ Page({
 
     this.setData({
       mainHallCount: formatStat(getCollectionCount(user)),
-      mainHallUrl: latest
-        ? `/pages/detail/detail?type=${latest.type}&id=${latest.id}`
-        : '/pages/record/record?new=1',
+      mainHallUrl: '/pages/hall/hall',
       subHalls,
       coverOptions
     })
